@@ -3,7 +3,7 @@ name: workflow
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: ⏳Install Dependencies
-        run: yarn run start
+        run: yarn start
 
       - name: ⚛️Build React App
         run: yarn build
