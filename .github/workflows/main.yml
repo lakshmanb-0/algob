@@ -3,7 +3,7 @@ name: workflow
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -22,14 +22,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: 🔐Configure AWS Credentials
-
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
 
       - name: ⏳Install Dependencies
         run: yarn run start
