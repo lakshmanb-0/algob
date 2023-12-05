@@ -92,7 +92,7 @@ export const LoginIn = () => {
                     <Button htmlType="submit" className="w-full mx-auto mb-2 mt-5" data-testid='LoginBtn' >
                         Log in
                     </Button>
-                    <p>Or <a href='/sign-up' data-testid='login-to-sign'>register now!</a></p>
+                    <h4>Or <p onClick={() => navigate('/sign-up')} className='inline hover:text-blue-300 cursor-pointer' data-testid='login-to-sign'>register now!</p></h4>
                 </Form.Item>
 
             </Form>

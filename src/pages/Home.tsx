@@ -42,15 +42,15 @@ export const Home = () => {
 
     return (
         <section className='max-width'>
-            <ProCard actions={<Button type='primary' className='m-3' onClick={createPost} disabled={!postText}>Post</Button>}>
-                <div className='flex sm:flex-row flex-col gap-2 py-3' data-test-id='cypress-postCreateBar'>
+            <ProCard actions={<Button type='primary' className='m-3' data-test-id="createPostBtn" onClick={createPost} disabled={!postText}>Post</Button>}>
+                <div className='flex sm:flex-row flex-col gap-2 py-3'>
                     <Avatar src={user?.image} />
-                    <TextArea placeholder="What is happening?!" autoSize value={postText} onChange={(e) => setPostText(e.target.value)} maxLength={200} showCount className='w-[90%]' />
+                    <TextArea placeholder="What is happening?!" data-test-id="postText" autoSize value={postText} onChange={(e) => setPostText(e.target.value)} maxLength={200} showCount className='w-[90%]' />
                 </div>
             </ProCard>
             {posts?.length ? <Flex gap="large" align="center" vertical className='mt-10'>
                 {posts?.map(el => (
-                    <Card data={el} />
+                    <Card data={el} key={el?._id} />
                 ))}
             </Flex> : <Empty description='No Post Available' className='mt-10' />}
         </section>

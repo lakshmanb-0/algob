@@ -65,7 +65,7 @@ export const ModalComments = ({ isModalOpen, setIsModalOpen, data }: menuInput) 
                 </div>
             )}>
             {postComment?.map((el: any) => (
-                <div className='flex items-center gap-2 my-3'>
+                <div className='flex items-center gap-2 my-3' key={el?._id}>
                     <Avatar src={el?.commenter?.image} />
                     <h1 className='text-gray-300'>@{el?.commenter?.username}</h1>
                     <p>{el?.comment}</p>

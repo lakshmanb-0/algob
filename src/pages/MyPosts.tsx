@@ -168,8 +168,7 @@ export const MyPosts = () => {
     return (
         posts?.length ? <ProTable
             columns={columns}
-            request={(params, sorter, filter) => {
-                console.log(params, sorter, filter);
+            request={() => {
                 return Promise.resolve({
                     data: posts,
                     success: true,

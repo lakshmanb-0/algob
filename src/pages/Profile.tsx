@@ -16,20 +16,29 @@ type FieldType = {
 };
 
 export const Profile = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.auth.user)
     const [newValues, setNewValues] = useState({
         email: user?.email,
         username: user?.username,
         name: user?.name,
-        image: user?.image,
+        image: user?.image
     })
+
+    useEffect(() => {
+        if (user?._id) {
+            setNewValues({
+                email: user?.email,
+                username: user?.username,
+                name: user?.name,
+                image: user?.image
+            })
+        }
+    }, [user])
 
     const valuesChange = (key: string, v: string) => {
         setNewValues({ ...newValues, [key]: v })
     }
-    console.log(newValues);
 
     const onFinish = async () => {
 
@@ -39,7 +48,6 @@ export const Profile = () => {
             name: newValues.name,
             image: newValues.image,
         }
-        console.log(arr);
 
         await fetch(`${process.env.REACT_APP_DATABASE_URL}/user/${user?._id}/updateUser`,
             {
@@ -67,29 +75,31 @@ export const Profile = () => {
         console.log('Failed:', errorInfo);
     };
 
-    return (
+    return user?._id?.length ? (
         <main className='max-width' >
             <Form
                 name="basic"
-                // labelCol={{ span: 8 }}
-                // wrapperCol={{ span: 16 }}
-                initialValues={{ remember: true }}
+                initialValues={{
+                    ['email']: newValues?.email,
+                    ['username']: newValues?.username,
+                    ['img']: newValues?.image,
+                    ['name']: newValues?.name,
+                }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
-            // autoComplete="off"
             >
                 <Form.Item<FieldType>
                     label="E-Mail"
                     name="email"
                 >
-                    <Input placeholder='Your Email!' type='email' defaultValue={newValues?.email} onChange={(e) => valuesChange('email', e.target.value)} />
+                    <Input placeholder='Your Email!' type='email' onChange={(e) => valuesChange('email', e.target.value)} />
                 </Form.Item>
 
                 <Form.Item<FieldType>
                     label="Username"
                     name="username"
                 >
-                    <Input placeholder='Your Username!' defaultValue={newValues?.username} onChange={(e) => valuesChange('username', e.target.value)} />
+                    <Input placeholder='Your Username!' onChange={(e) => valuesChange('username', e.target.value)} />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -99,7 +109,6 @@ export const Profile = () => {
                     <Select
                         style={{ width: '76px' }}
                         className='h-[40px] flex'
-                        defaultValue={newValues?.image}
                         onChange={(e) => valuesChange('image', e)}
                         options={[
                             { value: "/avatar_1.avif", label: <Avatar src='/avatar_1.avif' /> },
@@ -117,7 +126,7 @@ export const Profile = () => {
                     label="Name"
                     name="name"
                 >
-                    <Input placeholder='Your Name!' defaultValue={newValues?.name} onChange={(e) => valuesChange('name', e.target.value)} />
+                    <Input placeholder='Your Name!' onChange={(e) => valuesChange('name', e.target.value)} />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
@@ -128,5 +137,5 @@ export const Profile = () => {
 
             </Form>
         </main>
-    )
+    ) : <></>
 }

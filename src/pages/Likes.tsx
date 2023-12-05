@@ -25,7 +25,7 @@ export const Likes = () => {
     return posts?.length ? (
         <Flex gap="large" align="center" vertical className='mt-10'>
             {posts?.map(el => (
-                <Card data={el} />
+                <Card data={el} key={el?._id} />
             ))}
         </Flex>
     )
