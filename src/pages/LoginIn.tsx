@@ -77,7 +77,7 @@ export const LoginIn = () => {
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}
                 >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder='Your Username!' />
+                    <Input data-testid='LoginUsername' prefix={<UserOutlined className="site-form-item-icon" />} placeholder='Your Username!' />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -85,14 +85,14 @@ export const LoginIn = () => {
                     name="password"
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
-                    <Input.Password placeholder='Your Password!' prefix={<LockOutlined className="site-form-item-icon" />} />
+                    <Input.Password data-testid='LoginPassword' placeholder='Your Password!' prefix={<LockOutlined className="site-form-item-icon" />} />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }} >
-                    <Button htmlType="submit" className="w-full mx-auto mb-2 mt-5" >
+                    <Button htmlType="submit" className="w-full mx-auto mb-2 mt-5" data-testid='LoginBtn' >
                         Log in
                     </Button>
-                    <p>Or <a href='/sign-up'>register now!</a></p>
+                    <p>Or <a href='/sign-up' data-testid='login-to-sign'>register now!</a></p>
                 </Form.Item>
 
             </Form>

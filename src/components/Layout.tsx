@@ -24,8 +24,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             dispatch(logIn(JSON.parse(localStorage.getItem('user') ?? '')))
         }
         else if (!user?.username) {
-            setPathname('/sign-up')
-            return navigate('/sign-up')
+            setPathname('/log-in')
+            return navigate('/log-in')
         }
     }, [])
 

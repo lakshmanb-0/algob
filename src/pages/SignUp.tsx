@@ -84,7 +84,7 @@ export const SignUp = () => {
                     name="email"
                     rules={[{ required: true, message: 'Please input your Email!' }]}
                 >
-                    <Input placeholder='Your Email!' type='email' />
+                    <Input data-test-id='signUpEmail' placeholder='Your Email!' type='email' />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -92,7 +92,7 @@ export const SignUp = () => {
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}
                 >
-                    <Input placeholder='Your Username!' />
+                    <Input data-test-id='signUpUsername' placeholder='Your Username!' />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -103,6 +103,7 @@ export const SignUp = () => {
                     <Select
                         style={{ width: '76px' }}
                         className='h-[40px] flex'
+                        data-test-id='signUpImage'
                         options={[
                             { value: "/avatar_1.avif", label: <Avatar src='/avatar_1.avif' /> },
                             { value: "/avatar_2.avif", label: <Avatar src='/avatar_2.avif' /> },
@@ -120,7 +121,7 @@ export const SignUp = () => {
                     name="name"
                     rules={[{ required: true, message: 'Please input your Name!' }]}
                 >
-                    <Input placeholder='Your Name!' />
+                    <Input data-test-id='signUpName' placeholder='Your Name!' />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -128,7 +129,9 @@ export const SignUp = () => {
                     name="password"
                     rules={[{ required: true, message: 'Please input your Password!' }]}
                 >
-                    <Input.Password placeholder='Your Password!' />
+                    <Input.Password placeholder='Your Password!'
+                        data-test-id='signUpPassword'
+                    />
                 </Form.Item>
                 <Form.Item<FieldType>
                     label="Confirm Password"
@@ -146,13 +149,15 @@ export const SignUp = () => {
                         }),
                     ]}
                 >
-                    <Input.Password placeholder='Re-enter Password!' />
+                    <Input.Password placeholder='Re-enter Password!'
+                        data-test-id='signUpConfirmPassword'
+                    />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <div className='flex gap-4 mt-3'>
                         <Button onClick={() => navigate('/log-in')}>Already a Account</Button>
-                        <Button htmlType="submit" >
+                        <Button htmlType="submit" data-test-id='signUpBtn'>
                             Submit
                         </Button>
                     </div>

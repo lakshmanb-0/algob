@@ -9,7 +9,7 @@ import { getAllPost, loadingState } from '../redux/reducers/auth.reducers';
 let { TextArea } = Input
 
 export const Home = () => {
-    const [postText, setPostText] = useState('');
+    const [postText, setPostText] = useState<string>('');
     const { user, posts } = useSelector((state: RootState) => state.auth)
     const dispatch = useDispatch<AppDispatch>()
 
@@ -43,7 +43,7 @@ export const Home = () => {
     return (
         <section className='max-width'>
             <ProCard actions={<Button type='primary' className='m-3' onClick={createPost} disabled={!postText}>Post</Button>}>
-                <div className='flex sm:flex-row flex-col gap-2 py-3'>
+                <div className='flex sm:flex-row flex-col gap-2 py-3' data-test-id='cypress-postCreateBar'>
                     <Avatar src={user?.image} />
                     <TextArea placeholder="What is happening?!" autoSize value={postText} onChange={(e) => setPostText(e.target.value)} maxLength={200} showCount className='w-[90%]' />
                 </div>
