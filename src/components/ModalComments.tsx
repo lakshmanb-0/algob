@@ -40,7 +40,6 @@ export const ModalComments = ({ isModalOpen, setIsModalOpen, data }: menuInput) 
                 })
             })
             .then(response => response.json())
-            .catch(error => console.log(error))
         setPostInput('')
         dispatch(getAllPost())
         dispatch(loadingState(false));
@@ -60,8 +59,8 @@ export const ModalComments = ({ isModalOpen, setIsModalOpen, data }: menuInput) 
             onCancel={handleCancel}
             footer={() => (
                 <div className='mt-10'>
-                    <Button key='cancel' onClick={handleCancel}>Cancel</Button>
-                    <Button key='submit' onClick={AddComment} loading={loading}>Add</Button>
+                    <Button key='cancel' onClick={handleCancel} data-testid="CancelComment">Cancel</Button>
+                    <Button key='submit' onClick={AddComment} loading={loading} data-testid="addComment">Add</Button>
                 </div>
             )}>
             {postComment?.map((el: any) => (
@@ -72,7 +71,7 @@ export const ModalComments = ({ isModalOpen, setIsModalOpen, data }: menuInput) 
                 </div>
             ))}
             <div className='mt-10'>
-                <Input placeholder='Add a Comment...' value={postInput} onChange={(e) => setPostInput(e.target.value)} />
+                <Input placeholder='Add a Comment...' data-testid="commentInput" value={postInput} onChange={(e) => setPostInput(e.target.value)} />
             </div>
         </Modal>
     )

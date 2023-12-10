@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store/store';
 import { getAllPost, loadingState } from '../redux/reducers/auth.reducers';
 import { Empty, message } from 'antd';
-import { DeleteFilled } from '@ant-design/icons'
+import { DeleteFilled, PlusOutlined, MinusOutlined } from '@ant-design/icons'
 import moment from 'moment';
 import { postType } from '../components/Card';
 
@@ -67,12 +67,13 @@ export const MyPosts = () => {
                 }
             })
             .catch(error => console.log(error))
+        dispatch(loadingState(false));
     }
 
     // allPosts data 
     useEffect(() => {
         let postArr: TableListItem[] = [];
-        allPosts?.map((el: postType) => {
+        allPosts?.map((el: postType, index: number) => {
             let newPost = {
                 key: el?._id,
                 PostContent: el?.content,
@@ -80,7 +81,7 @@ export const MyPosts = () => {
                 Likes: el?.likes?.length,
                 CreatedAt: moment(el?.updatedAt).format('LLL'),
                 CommentsArr: el?.comments,
-                Action: <DeleteFilled className='text-red-500 text-center mx-auto cursor-pointer' onClick={() => deletePost(el?._id)} />
+                Action: <DeleteFilled data-testid={index == 3 ? 'deletePostPage' : ''} className='text-red-500 text-center mx-auto cursor-pointer' onClick={() => deletePost(el?._id)} />
             }
             el?.user?._id == user?._id && postArr.push(newPost)
         })
@@ -109,16 +110,17 @@ export const MyPosts = () => {
                 .catch(error => console.log(error))
             dispatch(loadingState(false));
         }
-        el?.CommentsArr?.map((el: any) => {
+        el?.CommentsArr?.map((el: any, index: number) => {
             let comments = {
                 key: el?._id,
                 date: moment(el?.date).format('LLL'),
                 username: el?.commenter?.username,
                 comment: el?.comment,
                 action: <DeletePopConfirm
+                    testing={index == 0 ? true : false}
                     onConfirm={() => deleteFunction(el?._id)}
                     title="Delete this comment"
-                    description="Are you sure to delete this post?" />,
+                    description="Are you sure to delete this Comment?" />,
             }
             data.push(comments)
         })
@@ -182,7 +184,17 @@ export const MyPosts = () => {
                 },
                 onChange: (page) => console.log(page),
             }}
-            expandable={{ expandedRowRender: (item) => expandedRowData(item) }}
+            expandable={{
+                expandedRowRender: (item) => expandedRowData(item),
+                expandIcon: ({ expanded, onExpand, record }) => (
+                    <span
+                        data-testid={`expandComment${record.key}`}
+                        onClick={(e) => onExpand(record, e)}
+                        className='cursor-pointer'
+                    >
+                        {expanded ? <MinusOutlined /> : <PlusOutlined />}
+                    </span>)
+            }}
             search={false}
             dateFormatter="string"
             options={false}

@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css';
 import Layout from './components/Layout';
 import { Routes, Route } from "react-router-dom";
@@ -14,8 +15,7 @@ import { RootState } from './redux/store/store';
 
 function App() {
   const [messageApi, contextHolder] = message.useMessage();
-  const { loading, user } = useSelector((state: RootState) => state.auth)
-
+  const { loading } = useSelector((state: RootState) => state.auth)
 
   return (
     <>

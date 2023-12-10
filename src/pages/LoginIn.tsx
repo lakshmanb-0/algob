@@ -50,14 +50,7 @@ export const LoginIn = () => {
                     message.error('No user Found', 2);
                 }
             })
-            .catch(error => { message.error('Something Error Happen', 2); console.log(error) })
         dispatch(loadingState(false));
-    };
-
-
-    const onFinishFailed = (errorInfo: any) => {
-        message.error('Something Error Happen', 2);
-        console.log('Failed:', errorInfo);
     };
 
     return (
@@ -68,7 +61,6 @@ export const LoginIn = () => {
                 wrapperCol={{ span: 16 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <h1 className='pb-8 text-center text-3xl font-medium'>Log in</h1>

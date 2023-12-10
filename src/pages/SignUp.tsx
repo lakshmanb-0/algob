@@ -56,14 +56,7 @@ export const SignUp = () => {
                     message.error('User Already exist', 2);
                 }
             })
-            .catch(error => console.log(error))
         dispatch(loadingState(false));
-    };
-
-
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-        message.error('Something Error Happen', 2);
     };
 
 
@@ -75,7 +68,6 @@ export const SignUp = () => {
                 wrapperCol={{ span: 16 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <h1 className='pb-8 text-center text-3xl font-medium'>Sign Up</h1>
@@ -84,7 +76,7 @@ export const SignUp = () => {
                     name="email"
                     rules={[{ required: true, message: 'Please input your Email!' }]}
                 >
-                    <Input data-test-id='signUpEmail' placeholder='Your Email!' type='email' />
+                    <Input data-testid='signUpEmail' placeholder='Your Email!' type='email' />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -92,7 +84,7 @@ export const SignUp = () => {
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}
                 >
-                    <Input data-test-id='signUpUsername' placeholder='Your Username!' />
+                    <Input data-testid='signUpUsername' placeholder='Your Username!' />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -103,7 +95,7 @@ export const SignUp = () => {
                     <Select
                         style={{ width: '76px' }}
                         className='h-[40px] flex'
-                        data-test-id='signUpImage'
+                        data-testid='signUpImage'
                         options={[
                             { value: "/avatar_1.avif", label: <Avatar src='/avatar_1.avif' /> },
                             { value: "/avatar_2.avif", label: <Avatar src='/avatar_2.avif' /> },
@@ -121,7 +113,7 @@ export const SignUp = () => {
                     name="name"
                     rules={[{ required: true, message: 'Please input your Name!' }]}
                 >
-                    <Input data-test-id='signUpName' placeholder='Your Name!' />
+                    <Input data-testid='signUpName' placeholder='Your Name!' />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -130,7 +122,7 @@ export const SignUp = () => {
                     rules={[{ required: true, message: 'Please input your Password!' }]}
                 >
                     <Input.Password placeholder='Your Password!'
-                        data-test-id='signUpPassword'
+                        data-testid='signUpPassword'
                     />
                 </Form.Item>
                 <Form.Item<FieldType>
@@ -150,14 +142,14 @@ export const SignUp = () => {
                     ]}
                 >
                     <Input.Password placeholder='Re-enter Password!'
-                        data-test-id='signUpConfirmPassword'
+                        data-testid='signUpConfirmPassword'
                     />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <div className='flex gap-4 mt-3'>
                         <Button onClick={() => navigate('/log-in')}>Already a Account</Button>
-                        <Button htmlType="submit" data-test-id='signUpBtn'>
+                        <Button htmlType="submit" data-testid='signUpBtn'>
                             Submit
                         </Button>
                     </div>

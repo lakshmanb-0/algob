@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ProLayout, { PageContainer } from '@ant-design/pro-layout';
 import defaultProps from './defaultProps';
-import { Dropdown, Spin, } from 'antd';
+import { Dropdown, } from 'antd';
 import { LogoutOutlined, } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     const navigate = useNavigate()
 
     const [pathname, setPathname] = useState<string>(location.pathname);
-    const { loading, user } = useSelector((state: RootState) => state.auth)
+    const { user } = useSelector((state: RootState) => state.auth)
 
     const dispatch = useDispatch()
 
@@ -23,10 +23,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         if (localStorage.getItem('user')) {
             dispatch(logIn(JSON.parse(localStorage.getItem('user') ?? '')))
         }
-        else if (!user?.username) {
-            setPathname('/log-in')
-            return navigate('/log-in')
-        }
+        // else if (!user?.username) {
+        //     setPathname('/log-in')
+        //     return navigate('/log-in')
+        // }
     }, [])
 
     return (
@@ -38,9 +38,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             }}
             hide={['/sign-up', '/log-in'].includes(location.pathname)}
             disableMobile={['/sign-up', '/log-in'].includes(location.pathname)}
-            onMenuHeaderClick={(e) => console.log(e)}
             menuItemRender={(item, dom) => (
-                <div
+                <div data-testid={item.dataId}
                     onClick={() => {
                         setPathname(item.path ?? location.pathname);
                         navigate(item.path ?? location.pathname)
@@ -71,6 +70,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                                     navigate('/log-in')
                                 },
                             }}
+                            data-testid="logoutBtn"
                         >
                             {dom}
                         </Dropdown>

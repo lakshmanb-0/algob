@@ -92,14 +92,14 @@ export const Profile = () => {
                     label="E-Mail"
                     name="email"
                 >
-                    <Input placeholder='Your Email!' type='email' onChange={(e) => valuesChange('email', e.target.value)} />
+                    <Input placeholder='Your Email!' data-testid='profileEmail' type='email' onChange={(e) => valuesChange('email', e.target.value)} />
                 </Form.Item>
 
                 <Form.Item<FieldType>
                     label="Username"
                     name="username"
                 >
-                    <Input placeholder='Your Username!' onChange={(e) => valuesChange('username', e.target.value)} />
+                    <Input placeholder='Your Username!' data-testid='profileUsername' onChange={(e) => valuesChange('username', e.target.value)} />
                 </Form.Item>
 
                 <Form.Item<FieldType>
@@ -109,6 +109,7 @@ export const Profile = () => {
                     <Select
                         style={{ width: '76px' }}
                         className='h-[40px] flex'
+                        data-testid='profileimage'
                         onChange={(e) => valuesChange('image', e)}
                         options={[
                             { value: "/avatar_1.avif", label: <Avatar src='/avatar_1.avif' /> },
@@ -126,11 +127,11 @@ export const Profile = () => {
                     label="Name"
                     name="name"
                 >
-                    <Input placeholder='Your Name!' onChange={(e) => valuesChange('name', e.target.value)} />
+                    <Input placeholder='Your Name!' data-testid='profileName' onChange={(e) => valuesChange('name', e.target.value)} />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button htmlType="submit" >
+                    <Button htmlType="submit" data-testid='profileBtn' >
                         Update
                     </Button>
                 </Form.Item>

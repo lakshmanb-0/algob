@@ -35,7 +35,6 @@ export const ModalInput = ({ isModalOpen, setIsModalOpen, data }: menuInput) => 
                 body: JSON.stringify({ content: postText })
             })
             .then(response => response.json())
-            .catch(error => console.log(error))
         setPostText('')
         setIsModalOpen(false);
         dispatch(getAllPost())
@@ -55,11 +54,11 @@ export const ModalInput = ({ isModalOpen, setIsModalOpen, data }: menuInput) => 
             onCancel={handleCancel}
             footer={() => (
                 <div className='mt-10'>
-                    <Button key='cancel' onClick={handleCancel}>Cancel</Button>
-                    <Button key='submit' onClick={updatePost} loading={loading}>Update</Button>
+                    <Button key='cancel' onClick={handleCancel} data-testid="cancelInput">Cancel</Button>
+                    <Button key='submit' onClick={updatePost} loading={loading} data-testid="updateBtn">Update</Button>
                 </div>
             )}>
-            <TextArea placeholder="What is happening?!" autoSize value={postText} onChange={(e) => setPostText(e.target.value)} maxLength={200} showCount />
+            <TextArea placeholder="What is happening?!" data-testid="postInput" autoSize value={postText} onChange={(e) => setPostText(e.target.value)} maxLength={200} showCount />
         </Modal>
     )
 }

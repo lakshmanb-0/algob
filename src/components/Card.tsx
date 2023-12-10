@@ -16,6 +16,7 @@ import { AppDispatch, RootState } from '../redux/store/store';
 import moment from 'moment';
 import { ModalInput } from './ModalInput';
 import { ModalComments } from './ModalComments';
+import { DeletePopConfirm } from './DeletePopConfirm';
 
 export type postType = {
     _id: string,
@@ -45,7 +46,7 @@ export type postType = {
     __v: number
 }
 
-export const Card = ({ data }: { data: postType }) => {
+export const Card = ({ data, testing }: { data: postType, testing?: boolean }) => {
     const dispatch = useDispatch<AppDispatch>()
     const user = useSelector((state: RootState) => state.auth.user)
     const [isModalOpenInput, setIsModalOpenInput] = useState<boolean>(false);
@@ -64,7 +65,6 @@ export const Card = ({ data }: { data: postType }) => {
                 },
             })
             .then(response => response.json())
-            .catch(error => console.log(error))
         dispatch(getAllPost())
         dispatch(loadingState(false));
     }
@@ -82,7 +82,6 @@ export const Card = ({ data }: { data: postType }) => {
                 },
             })
             .then(response => response.json())
-            .catch(error => console.log(error))
         dispatch(getAllPost())
         dispatch(loadingState(false));
     }
@@ -92,20 +91,25 @@ export const Card = ({ data }: { data: postType }) => {
         actionOptions.push(
             <div>
                 {data?.likes?.includes(user?._id) ?
-                    <LikeFilled title='Like' onClick={() => likePost('unlike', 'delete')} /> :
-                    <LikeOutlined title='Like' onClick={() => likePost('like', 'post')} />}{data?.likes?.length}
+                    <LikeFilled data-testid={testing ? "unlikePost" : ''} title='Like' onClick={() => likePost('unlike', 'delete')} /> :
+                    <LikeOutlined data-testid={testing ? "likePost" : ''} title='Like' onClick={() => likePost('like', 'post')} />}{data?.likes?.length}
             </div>,
             <div>
                 {data?.bookmarks?.includes(user?._id) ?
-                    <BookFilled title='Bookmark' onClick={() => likePost('bookmark', 'delete')} /> :
-                    <BookOutlined title='Bookmark' onClick={() => likePost('bookmark', 'post')} />}
+                    <BookFilled data-testid={testing ? "unBookmarkPost" : ''} title='Bookmark' onClick={() => likePost('bookmark', 'delete')} /> :
+                    <BookOutlined data-testid={testing ? "BookmarkPost" : ''} title='Bookmark' onClick={() => likePost('bookmark', 'post')} />}
             </div>,
-            <div onClick={() => setIsModalOpenComments(true)}> <CommentOutlined title='Comment' />{data?.comments?.length}</div>,)
+            <div data-testid={testing ? "commentClick" : ''} onClick={() => setIsModalOpenComments(true)}> <CommentOutlined title='Comment' />{data?.comments?.length}</div>,)
 
         if (data?.user?._id == user?._id) {
             actionOptions.push(
-                <FormOutlined title='Update' onClick={() => setIsModalOpenInput(true)} />,
-                <DeleteOutlined title='Delete' onClick={deletePost} />)
+                <FormOutlined data-testid={testing ? "updatePost" : ''} title='Update' onClick={() => setIsModalOpenInput(true)} />,
+                <DeletePopConfirm
+                    testing={testing ? true : false}
+                    onConfirm={() => deletePost()}
+                    title="Delete this Post"
+                    description="Are you sure to delete this post?" />,)
+            // <DeleteOutlined data-testid={testing ? "deletePost" : ''} title='Delete' onClick={deletePost} />)
         }
         return actionOptions
     }
