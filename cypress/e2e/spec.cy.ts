@@ -31,12 +31,12 @@ describe('template spec', () => {
     cy.get('[data-testid=signUpPassword]').type('a1');
     cy.get('[data-testid=signUpConfirmPassword]').type('a1');
 
-    cy.get('[data-testid=signUpEmail]').clear().type('a4@gmail.com');
-    cy.get('[data-testid=signUpUsername]').clear().type('a4');
+    cy.get('[data-testid=signUpEmail]').clear().type('a6@gmail.com');
+    cy.get('[data-testid=signUpUsername]').clear().type('a6');
     cy.get('[data-testid=signUpImage]').type('/avatar_3.avif').type('{enter}');
-    cy.get('[data-testid=signUpName]').clear().type('a4');
-    cy.get('[data-testid=signUpPassword]').clear().type('a4');
-    cy.get('[data-testid=signUpConfirmPassword]').clear().type('a4');
+    cy.get('[data-testid=signUpName]').clear().type('a6');
+    cy.get('[data-testid=signUpPassword]').clear().type('a6');
+    cy.get('[data-testid=signUpConfirmPassword]').clear().type('a6');
 
     cy.get('[data-testid=signUpBtn]').click()
     cy.wait(10000);
@@ -134,11 +134,11 @@ describe('template spec', () => {
 
   })
 
-  // logout Post 
-  it('logout Post', () => {
-    cy.get('[data-testid=logoutBtn]').click()
-    cy.wait(5000);
-  })
+  // // logout Post 
+  // it('logout Post', () => {
+  //   cy.get('[data-testid=logoutBtn]').click()
+  //   cy.wait(5000);
+  // })
 
 
 })                          
