@@ -2,19 +2,26 @@ describe('template spec', () => {
 
   // login in before every test 
   beforeEach(() => {
-    cy.visit('http://localhost:3000/log-in');
+    cy.visit('https://algob.vercel.app/log-in');
     cy.wait(5000);
-    cy.get('[data-testid=LoginUsername]').type('asd');
+    cy.get('[data-testid=login-to-sign]').click();
+    cy.wait(2000);
+    cy.get('[data-testid=alreadyAcc').click();
+    cy.wait(2000);
+    cy.get('[data-testid=LoginUsername]').type('asdasd');
     cy.get('[data-testid=LoginPassword]').type('asd');
     cy.get('[data-testid=LoginBtn]').click();
     cy.wait(5000);
-    cy.visit('http://localhost:3000');
+    cy.get('[data-testid=LoginUsername]').clear().type('asd');
+    cy.get('[data-testid=LoginBtn]').click();
+    cy.wait(5000);
+    cy.visit('https://algob.vercel.app');
   })
 
 
   // signup 
   it('signUp check', () => {
-    cy.visit('http://localhost:3000/sign-up');
+    cy.visit('https://algob.vercel.app/sign-up');
     cy.wait(5000);
 
     cy.get('[data-testid=signUpEmail]').type('a1@gmail.com');
@@ -24,14 +31,22 @@ describe('template spec', () => {
     cy.get('[data-testid=signUpPassword]').type('a1');
     cy.get('[data-testid=signUpConfirmPassword]').type('a1');
 
+    cy.get('[data-testid=signUpEmail]').clear().type('a4@gmail.com');
+    cy.get('[data-testid=signUpUsername]').clear().type('a4');
+    cy.get('[data-testid=signUpImage]').type('/avatar_3.avif').type('{enter}');
+    cy.get('[data-testid=signUpName]').clear().type('a4');
+    cy.get('[data-testid=signUpPassword]').clear().type('a4');
+    cy.get('[data-testid=signUpConfirmPassword]').clear().type('a4');
+
     cy.get('[data-testid=signUpBtn]').click()
     cy.wait(10000);
-    cy.visit('http://localhost:3000');
+    cy.visit('https://algob.vercel.app');
   })
 
 
   // create Post 
   it('create Post', () => {
+    cy.visit('https://algob.vercel.app');
     cy.get('[data-testid=postText]').type('One punch Man')
     cy.get('[data-testid=createPostBtn]').click()
     cy.wait(5000);
@@ -39,6 +54,7 @@ describe('template spec', () => {
 
   //card 
   it('Home Card Component', () => {
+    cy.visit('https://algob.vercel.app');
     // like and bookmark 
     cy.get('[data-testid=likePost]').click()
     cy.wait(5000);
@@ -108,10 +124,10 @@ describe('template spec', () => {
     cy.get('[data-testid=profilePage]').click()
     cy.wait(5000);
 
-    cy.get('[data-testid=profileEmail]').clear().type('a1@gmail.com');
-    cy.get('[data-testid=profileUsername]').clear().type('a1');
-    cy.get('[data-testid=profileimage]').clear().type('/avatar_3.avif').type('{enter}');
-    cy.get('[data-testid=profileName]').clear().type('a1');
+    cy.get('[data-testid=profileEmail]').clear().type('asd@gmail.com');
+    cy.get('[data-testid=profileUsername]').clear().type('asd');
+    cy.get('[data-testid=profileimage]').type('/avatar_3.avif').type('{enter}');
+    cy.get('[data-testid=profileName]').clear().type('asd');
 
     cy.get('[data-testid=profileBtn]').click()
     cy.wait(10000);

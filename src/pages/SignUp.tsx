@@ -148,7 +148,7 @@ export const SignUp = () => {
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <div className='flex gap-4 mt-3'>
-                        <Button onClick={() => navigate('/log-in')}>Already a Account</Button>
+                        <Button onClick={() => navigate('/log-in')} data-testid='alreadyAcc'>Already a Account</Button>
                         <Button htmlType="submit" data-testid='signUpBtn'>
                             Submit
                         </Button>

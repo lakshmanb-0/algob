@@ -66,7 +66,6 @@ export const MyPosts = () => {
                     dispatch(loadingState(false));
                 }
             })
-            .catch(error => console.log(error))
         dispatch(loadingState(false));
     }
 
@@ -107,7 +106,6 @@ export const MyPosts = () => {
                         dispatch(getAllPost())
                     }
                 })
-                .catch(error => console.log(error))
             dispatch(loadingState(false));
         }
         el?.CommentsArr?.map((el: any, index: number) => {
@@ -182,7 +180,6 @@ export const MyPosts = () => {
                 showTotal(total, range) {
                     return `Showing ${range.join('-')} of ${total} total`
                 },
-                onChange: (page) => console.log(page),
             }}
             expandable={{
                 expandedRowRender: (item) => expandedRowData(item),

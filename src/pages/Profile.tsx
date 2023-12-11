@@ -71,9 +71,6 @@ export const Profile = () => {
             .catch(error => console.log(error))
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
 
     return user?._id?.length ? (
         <main className='max-width' >
@@ -86,7 +83,6 @@ export const Profile = () => {
                     ['name']: newValues?.name,
                 }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
             >
                 <Form.Item<FieldType>
                     label="E-Mail"
